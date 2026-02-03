@@ -57,8 +57,9 @@ def update_data(year: int) -> Iterator[str]:
     yield ics_filename
 
 
-def update_main_ics(fr_year, to_year):
+def update_all_ics(fr_year, to_year):
     all_days = []
+    all_papers = set()
     for year in range(fr_year, to_year + 1):
         filename = workspace_path(f"{year}.json")
         if not os.path.isfile(filename):
@@ -66,12 +67,58 @@ def update_main_ics(fr_year, to_year):
         with open(filename, "r", encoding="utf8") as inf:
             data = json.loads(inf.read())
             all_days.extend(data.get("days"))
+            all_papers.update(data.get("papers", []))
 
-    filename = workspace_path("china-holiday.ics")
+    filename = workspace_path("all.ics")
     generate_ics(
         all_days,
         filename,
     )
+    return filename
+
+
+def update_all_json(fr_year, to_year):
+    all_days = []
+    all_papers = []
+    for year in range(fr_year, to_year + 1):
+        filename = workspace_path(f"{year}.json")
+        if not os.path.isfile(filename):
+            continue
+        with open(filename, "r", encoding="utf8") as inf:
+            data = json.loads(inf.read())
+            all_days.extend(data.get("days"))
+            all_papers.extend(data.get("papers", []))
+
+    all_papers = sorted(list(set(all_papers)))
+    all_days = sorted(all_days, key=lambda x: x["date"])
+
+    all_data = {
+        "years": {"start": fr_year, "end": to_year},
+        "papers": all_papers,
+        "days": all_days,
+    }
+
+    filename = workspace_path("all.json")
+    with open(filename, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(
+            dict(
+                (
+                    (
+                        "$schema",
+                        "https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all_schema.json",
+                    ),
+                    (
+                        "$id",
+                        "https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.json",
+                    ),
+                    *all_data.items(),
+                )
+            ),
+            f,
+            indent=4,
+            ensure_ascii=False,
+            cls=CustomJSONEncoder,
+        )
     return filename
 
 
@@ -80,7 +127,7 @@ def main():
     parser.add_argument(
         "--all",
         action="store_true",
-        help="Update all years since 2007",
+        help="Update all years since 2016",
     )
     parser.add_argument(
         "--release",
@@ -92,13 +139,16 @@ def main():
     now = datetime.now(ChinaTimezone())
     is_release = args.release
 
+    start_year = 2016 if args.all else now.year
     filenames = []
-    progress = tqdm(range(2007 if args.all else now.year, now.year + 2))
+    progress = tqdm(range(start_year, now.year + 2))
     for i in progress:
         progress.set_description(f"Updating {i} data")
         filenames += list(update_data(i))
-    progress.set_description("Updating china-holiday.ics")
-    filenames.append(update_main_ics(now.year - 4, now.year + 1))
+    progress.set_description("Updating all.ics")
+    filenames.append(update_all_ics(2016, now.year + 1))
+    progress.set_description("Updating all.json")
+    filenames.append(update_all_json(2016, now.year + 1))
     print("")
 
     subprocess.run(["git", "add", *filenames], check=True)
