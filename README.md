@@ -29,12 +29,12 @@
 
 JSON 数据地址：
 ```
-https://raw.githubusercontent.com/yourusername/china-holiday/master/{年份}.json
+https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/{年份}.json
 ```
 
 ICalendar 订阅地址：
 ```
-https://raw.githubusercontent.com/yourusername/china-holiday/master/{年份}.ics
+https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/{年份}.ics
 ```
 
 ## 本地运行

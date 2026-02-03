@@ -37,11 +37,11 @@ def update_data(year: int) -> Iterator[str]:
                 (
                     (
                         "$schema",
-                        "https://raw.githubusercontent.com/yourusername/china-holiday/master/schema.json",
+                        "https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/schema.json",
                     ),
                     (
                         "$id",
-                        f"https://raw.githubusercontent.com/yourusername/china-holiday/master/{year}.json",
+                        f"https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/{year}.json",
                     ),
                     *data.items(),
                 )
