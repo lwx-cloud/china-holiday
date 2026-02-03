@@ -115,3 +115,13 @@ make format
 make lint
 make test
 ```
+
+## 致谢
+
+本项目参考了 [NateScarlet/holiday-cn](https://github.com/NateScarlet/holiday-cn) 项目的设计思路和实现方式，感谢原作者的开源贡献。
+
+本项目使用 AI 辅助创建和优化，包括：
+- 代码生成和优化
+- 文档编写
+- GitHub Actions 配置
+- 项目结构设计
