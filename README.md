@@ -49,6 +49,8 @@
 
 ## 通过互联网使用
 
+### GitHub Raw（推荐使用 CDN）
+
 单年 JSON 数据地址：
 ```
 https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/{年份}.json
@@ -67,6 +69,35 @@ https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.json
 所有年份整合 ICalendar 订阅地址：
 ```
 https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.ics
+```
+
+### jsDelivr CDN（高速访问）
+
+单年 JSON 数据地址：
+```
+https://cdn.jsdelivr.net/gh/lwx-cloud/china-holiday@main/{年份}.json
+```
+
+单年 ICalendar 订阅地址：
+```
+https://cdn.jsdelivr.net/gh/lwx-cloud/china-holiday@main/{年份}.ics
+```
+
+所有年份整合 JSON 数据地址：
+```
+https://cdn.jsdelivr.net/gh/lwx-cloud/china-holiday@main/all.json
+```
+
+所有年份整合 ICalendar 订阅地址：
+```
+https://cdn.jsdelivr.net/gh/lwx-cloud/china-holiday@main/all.ics
+```
+
+### 使用特定版本
+
+使用 release 版本（需先在 GitHub 创建 release）：
+```
+https://cdn.jsdelivr.net/gh/lwx-cloud/china-holiday@{版本号}/{年份}.json
 ```
 
 ## 本地运行
