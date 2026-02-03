@@ -49,7 +49,11 @@
 
 ## 通过互联网使用
 
-### GitHub Raw（推荐使用 CDN）
+### 访问方式说明
+
+- **国内用户**：推荐使用 gh-proxy 或 mirror.ghproxy.com 加速访问
+- **国际用户**：推荐使用 jsDelivr CDN
+- **稳定性要求高**：建议自行搭建静态文件服务
 
 单年 JSON 数据地址：
 ```
@@ -71,7 +75,26 @@ https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.json
 https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.ics
 ```
 
-### jsDelivr CDN（高速访问）
+### 国内加速（推荐国内用户使用）
+
+**gh-proxy（GitHub 文件代理）**：
+```
+https://ghproxy.com/https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/{年份}.json
+https://ghproxy.com/https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.json
+```
+
+**GitHub 文件加速**：
+```
+https://mirror.ghproxy.com/https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/{年份}.json
+https://mirror.ghproxy.com/https://raw.githubusercontent.com/lwx-cloud/china-holiday/main/all.json
+```
+
+**FastGit（GitHub 加速）**：
+```
+https://cdn.jsdelivr.net/gh/lwx-cloud/china-holiday@main/{年份}.json
+```
+
+### jsDelivr CDN（国际访问）
 
 单年 JSON 数据地址：
 ```
